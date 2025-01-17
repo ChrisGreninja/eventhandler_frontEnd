@@ -24,7 +24,7 @@ function EventPage() {
     const navigate = useNavigate();
 
        // WebSocket connection
-       const { sendMessage, lastMessage } = useWebSocket('ws://eventhandler-backend-sts7.onrender.com');
+       const { sendMessage, lastMessage } = useWebSocket('wss://eventhandler-backend-sts7.onrender.com');
 
     useEffect(() => {
         // Fetch events
