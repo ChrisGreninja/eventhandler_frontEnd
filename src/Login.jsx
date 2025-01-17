@@ -12,7 +12,7 @@ function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:8081/login', values).then(res => {
+    axios.post('https://eventhandler-backend-sts7.onrender.com/login', values).then(res => {
       if (res.data.Status === "Success") {
         navigate('/');
       } else {
@@ -28,7 +28,7 @@ function Login() {
       password: 'guest'
     };
     
-    axios.post('http://localhost:8081/login', guestCredentials).then(res => {
+    axios.post('https://eventhandler-backend-sts7.onrender.com/login', guestCredentials).then(res => {
       if (res.data.Status === "Success") {
         navigate('/');
       } else {
