@@ -13,7 +13,9 @@ function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(values);  // Log the values to check if they are being correctly populated
-    axios.post('https://eventhandler-backend-sts7.onrender.com/register', values)
+    axios.post('https://eventhandler-backend-sts7.onrender.com/register', values, {
+    withCredentials: true
+    })
       .then(res => {
         if (res.data.Status === "Success") {
           navigate('/login');
