@@ -13,12 +13,12 @@ function Event() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [hasJoined, setHasJoined] = useState(false);
 
-    const { sendMessage, lastMessage } = useWebSocket('ws://localhost:8081');
+    const { sendMessage, lastMessage } = useWebSocket('ws://eventhandler-backend-sts7.onrender.com');
 
     useEffect(() => {
         // Fetch event details
         axios
-            .get(`http://localhost:8081/events/${id}`, { withCredentials: true })
+            .get(`https://eventhandler-backend-sts7.onrender.com/events/${id}`, { withCredentials: true })
             .then((res) => {
                 if (res.data.Error) {
                     alert(res.data.Error);
