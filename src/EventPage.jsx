@@ -26,13 +26,24 @@ function EventPage() {
     const [showForm, setShowForm] = useState(false);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const checkAuthAndFetchData = async () => {
             try {
-                // Fetch events
+                // First check authentication
+                const userRes = await axios.get('https://eventhandler-backend-sts7.onrender.com/user', { withCredentials: true });
+                if (!userRes.data.name) {
+                    navigate('/login');
+                    return;
+                }
+
+                setUserName(userRes.data.name);
+                setIsLoggedIn(true);
+                setIsGuest(userRes.data.name === 'Guest');
+
+                // Then fetch events
                 const eventsRes = await axios.get('https://eventhandler-backend-sts7.onrender.com/events', { withCredentials: true });
                 setEvents(eventsRes.data || []);
                 
-                // For each event, fetch its attendee count
+                // Fetch attendee counts
                 for (const event of eventsRes.data) {
                     try {
                         const eventRes = await axios.get(`https://eventhandler-backend-sts7.onrender.com/events/${event._id}`, { withCredentials: true });
@@ -46,23 +57,13 @@ function EventPage() {
                         console.error('Error fetching event details:', err);
                     }
                 }
-
-                // Fetch user data
-                const userRes = await axios.get('https://eventhandler-backend-sts7.onrender.com/user', { withCredentials: true });
-                if (userRes.data.name) {
-                    setUserName(userRes.data.name);
-                    setIsLoggedIn(true);
-                    setIsGuest(userRes.data.name === 'Guest');
-                }
             } catch (err) {
-                console.log(err);
-                setEvents([]);
-                setIsLoggedIn(false);
+                console.log('Auth check error:', err);
                 navigate('/login');
             }
         };
 
-        fetchData();
+        checkAuthAndFetchData();
     }, [navigate]);
 
     useEffect(() => {
