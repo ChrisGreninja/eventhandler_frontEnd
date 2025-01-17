@@ -24,11 +24,11 @@ function EventPage() {
     const navigate = useNavigate();
 
        // WebSocket connection
-       const { sendMessage, lastMessage } = useWebSocket('ws://localhost:8081');
+       const { sendMessage, lastMessage } = useWebSocket('ws://eventhandler-backend-sts7.onrender.com');
 
     useEffect(() => {
         // Fetch events
-        axios.get('http://localhost:8081/events', { withCredentials: true })
+        axios.get('https://eventhandler-backend-sts7.onrender.com/events', { withCredentials: true })
             .then(res => {
                 setEvents(res.data || []);
             })
@@ -39,7 +39,7 @@ function EventPage() {
             });
 
         // Fetch attendee counts
-        axios.get('http://localhost:8081/events/attendees', { withCredentials: true })
+        axios.get('https://eventhandler-backend-sts7.onrender.com/events/attendees', { withCredentials: true })
             .then(res => {
                 if (!res.data.Error) {
                     setAttendees(res.data);
@@ -50,7 +50,7 @@ function EventPage() {
             });
 
         // Fetch user data
-        axios.get('http://localhost:8081/user', { withCredentials: true })
+        axios.get('https://eventhandler-backend-sts7.onrender.com/user', { withCredentials: true })
             .then(res => {
                 if (res.data.name) {
                     setUserName(res.data.name);
