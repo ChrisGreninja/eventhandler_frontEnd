@@ -13,16 +13,26 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const res = await axios.post('https://eventhandler-backend-sts7.onrender.com/login', values);
+      const res = await axios.post('https://eventhandler-backend-sts7.onrender.com/login', values, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      // Add some debug logging
+      console.log('Login response:', res.data);
+      
       if (res.data.Status === "Success") {
         navigate('/');
       } else {
-        alert(res.data.Error);
+        alert(res.data.Error || 'Login failed');
       }
     } catch (err) {
-      console.log(err);
+      console.error('Login error:', err);
+      alert(err.response?.data?.Error || 'An error occurred during login');
     }
-  };
+};
 
   // Handle guest login
   const handleGuestLogin = async () => {
