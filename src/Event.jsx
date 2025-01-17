@@ -64,7 +64,7 @@ function Event() {
 
         try {
             const response = await axios.post(
-                'https://eventhandler-backend-sts7.onrender.com/join',
+                'https://eventhandler-backend-sts7.onrender.com/events/join',
                 { eventId: id },
                 { withCredentials: true }
             );
