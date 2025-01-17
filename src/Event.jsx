@@ -13,7 +13,7 @@ function Event() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [hasJoined, setHasJoined] = useState(false);
 
-    const { sendMessage, lastMessage } = useWebSocket('ws://eventhandler-backend-sts7.onrender.com');
+    const { sendMessage, lastMessage } = useWebSocket('wss://eventhandler-backend-sts7.onrender.com');
 
     useEffect(() => {
         // Fetch event details
