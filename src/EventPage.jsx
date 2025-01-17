@@ -8,7 +8,7 @@ function EventPage() {
     const [events, setEvents] = useState([]);
     const [attendees, setAttendees] = useState({});
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isGuest, setIsGuest] = useState(false);
+    const [isGuest, setIsGuest] = useState(false); 
     const [userName, setUserName] = useState('');
     const navigate = useNavigate();
     const { sendMessage, lastMessage } = useWebSocket('wss://eventhandler-backend-sts7.onrender.com');
